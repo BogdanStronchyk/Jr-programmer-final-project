@@ -18,9 +18,8 @@ public class Player : MonoBehaviour
         get { return m_vertical; }
         set
         {
-            if (value <= 0f && value >= -90f / Sensitivity)
+            if (value <= 0f && value >= -90f)
             {
-                Debug.Log($"Value: {value}");
                 m_vertical = value;
             }
            
@@ -73,8 +72,11 @@ public class Player : MonoBehaviour
     {
         vertical += Input.GetAxis("Mouse Y");
         horizontal += Input.GetAxis("Mouse X");
-        Vector3 direction = new Vector3(-vertical, horizontal, 0f);
-        focalPoint.transform.localEulerAngles = direction * Sensitivity;
+        Vector3 direction = new Vector3(-vertical, 0f, 0f);
+        Vector3 playerRotation = new Vector3(0f, Input.GetAxis("Mouse X"), 0f);
+        focalPoint.transform.localEulerAngles = direction;
+        transform.Rotate(playerRotation * Sensitivity);
+        Debug.Log(transform.localEulerAngles);
     }
 
 
