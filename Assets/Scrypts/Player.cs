@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     // look direction variables
     private float m_horizontal;
-    public float horizontal 
+    public float horizontal
     {
         get { return m_horizontal; }
         set { m_horizontal = value; }
@@ -22,9 +22,9 @@ public class Player : MonoBehaviour
             {
                 m_vertical = value;
             }
-           
+
         }
-        
+
     }
 
 
@@ -72,15 +72,16 @@ public class Player : MonoBehaviour
 
     private void GunzUp()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        if (Input.GetKey(KeyCode.Mouse1))
         {
             Gun.transform.localEulerAngles = new Vector3(0f, 0, 0f);
         }
-        else if (Input.GetKeyUp(KeyCode.Mouse1))
+        else
         {
             Gun.transform.localEulerAngles = new Vector3(90f, 0, 0f);
         }
     }
+
 
     public void LookAround()
     {
@@ -88,9 +89,8 @@ public class Player : MonoBehaviour
         horizontal += Input.GetAxis("Mouse X");
         Vector3 direction = new Vector3(-vertical, 0f, 0f);
         Vector3 playerRotation = new Vector3(0f, Input.GetAxis("Mouse X"), 0f);
-        focalPoint.transform.localEulerAngles = direction;
         transform.Rotate(playerRotation * Sensitivity);
-        Debug.Log(transform.localEulerAngles);
+        focalPoint.transform.localEulerAngles = direction;
     }
 
 
