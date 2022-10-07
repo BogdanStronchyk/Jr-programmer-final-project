@@ -34,11 +34,13 @@ public class Player : MonoBehaviour
 
     private CharacterController Controller;
     private GameObject focalPoint;
+    private GameObject Gun;
     // Start is called before the first frame update
     void Start()
     {
         Controller = GetComponent<CharacterController>();
         focalPoint = GameObject.Find("FocalPoint");
+        Gun = GameObject.Find("GunMount");
     }
 
     public void Move()
@@ -68,6 +70,18 @@ public class Player : MonoBehaviour
 
     }
 
+    private void GunzUp()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            Gun.transform.localEulerAngles = new Vector3(0f, 0, 0f);
+        }
+        else if (Input.GetKeyUp(KeyCode.Mouse1))
+        {
+            Gun.transform.localEulerAngles = new Vector3(90f, 0, 0f);
+        }
+    }
+
     public void LookAround()
     {
         vertical += Input.GetAxis("Mouse Y");
@@ -85,5 +99,6 @@ public class Player : MonoBehaviour
     {
         LookAround();
         Move();
+        GunzUp();
     }
 }
