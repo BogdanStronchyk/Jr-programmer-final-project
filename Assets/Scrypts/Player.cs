@@ -31,20 +31,25 @@ public class Player : MonoBehaviour
 
     [SerializeField] float Sensitivity = 1;
     [SerializeField] float movementSpeed = 5;
+    [SerializeField] float JumpForce = 5;
 
     private CharacterController Controller;
+    private Rigidbody PlayerRB;
+    private GameObject focalPoint;
     // Start is called before the first frame update
     void Start()
     {
         Controller = GetComponent<CharacterController>();
+        PlayerRB = GetComponent<Rigidbody>();
+        focalPoint = GameObject.Find("FocalPoint");
     }
 
     public void Move()
     {
-        Vector3 directionForward = transform.forward;
+        Vector3 directionForward = focalPoint.transform.forward;
         directionForward.y = 0;
 
-        Vector3 directionRightLeft = transform.right;
+        Vector3 directionRightLeft = focalPoint.transform.right;
         directionRightLeft.y = 0;
         if (Input.GetKey(KeyCode.W))
         {
@@ -64,6 +69,10 @@ public class Player : MonoBehaviour
             Controller.Move(directionRightLeft * Time.deltaTime * movementSpeed);
         }
 
+        if (Input.GetKey(KeyCode.Space))
+        {
+            PlayerRB.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
+        }
     }
 
     public void LookAround()
@@ -71,7 +80,7 @@ public class Player : MonoBehaviour
         vertical += Input.GetAxis("Mouse Y");
         horizontal += Input.GetAxis("Mouse X");
         Vector3 direction = new Vector3(-vertical, horizontal, 0f);
-        transform.localEulerAngles = direction * Sensitivity;
+        focalPoint.transform.localEulerAngles = direction * Sensitivity;
     }
 
 
