@@ -35,13 +35,11 @@ public class Player : MonoBehaviour
     [SerializeField] float JumpForce = 5;
 
     private CharacterController Controller;
-    private Rigidbody PlayerRB;
     private GameObject focalPoint;
     // Start is called before the first frame update
     void Start()
     {
         Controller = GetComponent<CharacterController>();
-        PlayerRB = GetComponent<Rigidbody>();
         focalPoint = GameObject.Find("FocalPoint");
     }
 
@@ -70,10 +68,6 @@ public class Player : MonoBehaviour
             Controller.Move(directionRightLeft * Time.deltaTime * movementSpeed);
         }
 
-        if (Input.GetKey(KeyCode.Space))
-        {
-            PlayerRB.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
-        }
     }
 
     public void LookAround()
