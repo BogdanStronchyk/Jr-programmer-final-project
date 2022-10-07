@@ -32,7 +32,6 @@ public class Player : MonoBehaviour
 
     [SerializeField] float Sensitivity = 1;
     [SerializeField] float movementSpeed = 5;
-    [SerializeField] float JumpForce = 5;
 
     private CharacterController Controller;
     private GameObject focalPoint;
