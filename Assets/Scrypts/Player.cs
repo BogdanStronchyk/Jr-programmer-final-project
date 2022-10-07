@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
         get { return m_vertical; }
         set
         {
-            if (value <= 90f / Sensitivity && value >= -90f / Sensitivity)
+            if (value <= 0f && value >= -90f / Sensitivity)
             {
                 Debug.Log($"Value: {value}");
                 m_vertical = value;
