@@ -12,7 +12,6 @@ public class BulletFire : MonoBehaviour
     // Update is called once per frame
     private void ActivateBullet()
     {
-        Debug.Log("Method activated");
         GameObject obj = ObjectPoolerScript.current.GetPooledObject();
         if (obj == null) return;
 

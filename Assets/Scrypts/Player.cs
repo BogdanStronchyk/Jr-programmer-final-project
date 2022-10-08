@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
         get { return m_vertical; }
         set
         {
-            if (value <= 0f && value >= -90f)
+            if (value <= 90f && value >= -90f)
             {
                 m_vertical = value;
             }
@@ -27,11 +27,12 @@ public class Player : MonoBehaviour
 
     }
 
-
+    
 
     [SerializeField] float Sensitivity = 1;
     [SerializeField] float movementSpeed = 5;
 
+    private Camera Camera;
     private CharacterController Controller;
     private GameObject focalPoint;
     private GameObject Gun;
@@ -43,6 +44,7 @@ public class Player : MonoBehaviour
         focalPoint = GameObject.Find("FocalPoint");
         Gun = GameObject.Find("GunMount");
         fireScrypt = GetComponent<BulletFire>();
+        Camera = FindObjectOfType<Camera>();
     }
 
     public void Move()
@@ -76,7 +78,10 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Mouse1))
         {
-            Gun.transform.localEulerAngles = new Vector3(0f, 0, 0f);
+            Camera.transform.localPosition = new Vector3(0.52f, 0.2f, -3.5f);
+            Camera.fieldOfView = 30;
+            Gun.transform.localEulerAngles = focalPoint.transform.localEulerAngles;
+
             if (Input.GetKey(KeyCode.Mouse0))
             {
                 fireScrypt.Fire();
@@ -88,6 +93,8 @@ public class Player : MonoBehaviour
         }
         else
         {
+            Camera.transform.localPosition = new Vector3(3f, 0.2f, -3.5f);
+            Camera.fieldOfView = 60;
             Gun.transform.localEulerAngles = new Vector3(90f, 0, 0f);
             fireScrypt.HoldFire();
         }
