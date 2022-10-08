@@ -35,12 +35,14 @@ public class Player : MonoBehaviour
     private CharacterController Controller;
     private GameObject focalPoint;
     private GameObject Gun;
+    private BulletFire fireScrypt;
     // Start is called before the first frame update
     void Start()
     {
         Controller = GetComponent<CharacterController>();
         focalPoint = GameObject.Find("FocalPoint");
         Gun = GameObject.Find("GunMount");
+        fireScrypt = GetComponent<BulletFire>();
     }
 
     public void Move()
@@ -75,10 +77,19 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.Mouse1))
         {
             Gun.transform.localEulerAngles = new Vector3(0f, 0, 0f);
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                fireScrypt.Fire();
+            }
+            else if (!Input.GetKey(KeyCode.Mouse0))
+            {
+                fireScrypt.HoldFire();
+            }
         }
         else
         {
             Gun.transform.localEulerAngles = new Vector3(90f, 0, 0f);
+            fireScrypt.HoldFire();
         }
     }
 
@@ -100,5 +111,6 @@ public class Player : MonoBehaviour
         LookAround();
         Move();
         GunzUp();
+        
     }
 }
