@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletFire : MonoBehaviour
+public class FireScrypt : MonoBehaviour
 {
 
     public float fireRate;

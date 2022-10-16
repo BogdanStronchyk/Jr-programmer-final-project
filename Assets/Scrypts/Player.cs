@@ -36,14 +36,14 @@ public class Player : MonoBehaviour
     private CharacterController Controller;
     private GameObject focalPoint;
     private GameObject Gun;
-    private BulletFire fireScrypt;
+    private FireScrypt fireScrypt;
     // Start is called before the first frame update
     void Start()
     {
         Controller = GetComponent<CharacterController>();
         focalPoint = GameObject.Find("FocalPoint");
         Gun = GameObject.Find("GunMount");
-        fireScrypt = GetComponent<BulletFire>();
+        fireScrypt = GetComponent<FireScrypt>();
         Camera = FindObjectOfType<Camera>();
     }
 
