@@ -23,11 +23,21 @@ public class BulletBehavior : MonoBehaviour
 
     private void Update()
     {
-        if ((gameObject.transform.position - GameObject.Find("Player").transform.position).magnitude > bulletRange)
+        Vector3 bulletPosition = transform.position;
+        Vector3 playerPosition = GameObject.Find("Player").transform.position;
+
+        float distance = (bulletPosition - playerPosition).magnitude;
+
+        if (distance > bulletRange)
         {
-            bulletRB.velocity = Vector3.zero;
             gameObject.SetActive(false);
         }
+    }
+
+    private void OnDisable()
+    {
+        // Disable bullet velocity to prevent accelerating on reactivation
+        bulletRB.velocity = Vector3.zero;
     }
 
 }
