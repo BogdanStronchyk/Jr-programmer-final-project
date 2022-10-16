@@ -30,8 +30,7 @@ Transform:
   m_LocalPosition: {x: 0.054486275, y: 0.025921725, z: 0.37828168}
   m_LocalScale: {x: 0.33190998, y: 0.21134323, z: 0.99}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6282056073119630322}
+  m_Children: []
   m_Father: {fileID: 3848833213138663961}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -360,37 +359,6 @@ Transform:
   m_Children:
   - {fileID: 5951098631817273651}
   m_Father: {fileID: 5951098631465360451}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7692459538370077632
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6282056073119630322}
-  m_Layer: 0
-  m_Name: BuletSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6282056073119630322
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7692459538370077632}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 0.487}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1124227749533704202}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7994179967589010091
