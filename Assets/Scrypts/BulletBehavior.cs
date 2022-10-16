@@ -8,7 +8,7 @@ public class BulletBehavior : MonoBehaviour
     public Vector3 flightDirection;
     public float bulletRange = 100f;
     
-    private float bulletSpeed = 150f;
+    private float bulletSpeed = 500f;
     private Rigidbody bulletRB;
     
     private void Awake()
@@ -38,6 +38,12 @@ public class BulletBehavior : MonoBehaviour
     {
         // Disable bullet velocity to prevent accelerating on reactivation
         bulletRB.velocity = Vector3.zero;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        gameObject.SetActive(false);
+        Debug.Log($"You hit {collision.gameObject.name}");
     }
 
 }
