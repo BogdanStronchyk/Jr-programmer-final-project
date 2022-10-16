@@ -6,7 +6,7 @@ public class ObjectPoolerScript : MonoBehaviour
 {
     public static ObjectPoolerScript current;
     public GameObject pooledObject;
-    public int pulledAmount = 20;
+    public int pulledAmount = 7;
     public bool willGrow = true;
 
     List<GameObject> pooledObjects;
