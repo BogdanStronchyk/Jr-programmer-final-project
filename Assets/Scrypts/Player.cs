@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    // INCAPSULATION EXAMPLE
     // look direction variables
     private float m_horizontal;
     public float horizontal
@@ -12,6 +13,7 @@ public class Player : MonoBehaviour
         set { m_horizontal = value; }
     }
 
+    // Vertical constricrion of camera rotation
     private float m_vertical;
     public float vertical
     {
@@ -27,20 +29,31 @@ public class Player : MonoBehaviour
 
     }
 
-    
+    // Player health incapsulation and clamping between 100 and 0
+    [SerializeField] int m_health = 100;
+    public int health 
+    {
+        get { return m_health; }
+        set
+        {        
+            m_health = value;
+        }
+    }
+
+    public static Player Instance { get; private set; }
 
     [SerializeField] float Sensitivity = 1;
     [SerializeField] float movementSpeed = 5;
 
     private Camera Camera;
-    private CharacterController Controller;
     private GameObject focalPoint;
     private GameObject Gun;
     private FireScrypt fireScrypt;
-    // Start is called before the first frame update
+    private bool isAlive = true;
+    
     void Start()
     {
-        Controller = GetComponent<CharacterController>();
+        Instance = this;
         focalPoint = GameObject.Find("FocalPoint");
         Gun = GameObject.Find("GunMount");
         fireScrypt = GetComponent<FireScrypt>();
@@ -49,27 +62,28 @@ public class Player : MonoBehaviour
 
     public void Move()
     {
-        Vector3 directionForward = focalPoint.transform.forward;
+        Vector3 directionForward = Vector3.forward;
         directionForward.y = 0;
 
-        Vector3 directionRightLeft = focalPoint.transform.right;
+        Vector3 directionRightLeft = Vector3.right;
         directionRightLeft.y = 0;
+
         if (Input.GetKey(KeyCode.W))
         {
-            Controller.Move(directionForward * Time.deltaTime * movementSpeed);
+            transform.Translate(directionForward * Time.deltaTime * movementSpeed);
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            Controller.Move(-directionForward * Time.deltaTime * movementSpeed);
+            transform.Translate(-directionForward * Time.deltaTime * movementSpeed);
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            Controller.Move(-directionRightLeft * Time.deltaTime * movementSpeed);
+            transform.Translate(-directionRightLeft * Time.deltaTime * movementSpeed);
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            Controller.Move(directionRightLeft * Time.deltaTime * movementSpeed);
+            transform.Translate(directionRightLeft * Time.deltaTime * movementSpeed);
         }
 
     }
@@ -105,19 +119,36 @@ public class Player : MonoBehaviour
     {
         vertical += Input.GetAxis("Mouse Y");
         horizontal += Input.GetAxis("Mouse X");
+
         Vector3 direction = new Vector3(-vertical, 0f, 0f);
         Vector3 playerRotation = new Vector3(0f, Input.GetAxis("Mouse X"), 0f);
+
         transform.Rotate(playerRotation * Sensitivity);
         focalPoint.transform.localEulerAngles = direction;
     }
 
+    public void HealthCheck()
+    {
+        if (m_health == 0)
+        {
+            Death();
+        }
+    }
 
-    // Update is called once per frame
+    public void Death()
+    {
+        isAlive = false;
+    }
+
     void Update()
     {
-        LookAround();
-        Move();
-        GunzUp();
-        
+        HealthCheck();
+        if (isAlive)
+        {
+            // ABSTRACTION EXAMPLE
+            LookAround();
+            Move();
+            GunzUp();
+        }
     }
 }

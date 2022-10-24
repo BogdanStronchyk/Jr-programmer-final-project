@@ -110,11 +110,11 @@ GameObject:
   - component: {fileID: 5951098631465360453}
   - component: {fileID: 5951098631465360454}
   - component: {fileID: 5951098631465360450}
-  - component: {fileID: 5951098631465360449}
   - component: {fileID: 74394090}
+  - component: {fileID: 140801329}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -212,26 +212,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 572660073faaca84081399b5239784fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_health: 100
   Sensitivity: 2
   movementSpeed: 5
---- !u!143 &5951098631465360449
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5951098631465354168}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &74394090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,7 +227,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 288cf70ad584fe44c9dcc4d2064eb70f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 0.05
+  fireRate: 0.15
+  blowback: 10
+--- !u!54 &140801329
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5951098631465354168}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &5951098631817273654
 GameObject:
   m_ObjectHideFlags: 0
