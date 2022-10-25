@@ -8,25 +8,26 @@ using UnityEngine;
 /// </summary>
 public abstract class EnemyBehaviour : MonoBehaviour
 {
-    protected int health; // enemy health
+    
     protected int damage;
+    protected int health; // enemy health
 
     protected float attackRate;
     protected float distance; // distance between palyer and enemy
     protected float speed = 5f;
     protected float chargeForce = 10f;
     protected float jumpForce = 5f;
-    protected float chargeZone = 5f;
-    protected float damageZone = 5f;
+    protected float chargeZone = 7f;
+    protected float damageZone = 2f;
     protected float perceprionRange = 15f;
     protected Vector3 direction; // enemy movement direction towards player
 
     private Rigidbody EnemyRB;
-    protected bool hasAttacked = false;
+    protected bool readyToCharge = false;
     protected bool dealingDamage = false;
     protected bool isOnGround = false;
 
-    public int level;
+    public int level = 1;
 
     private void Awake()
     {
@@ -38,36 +39,57 @@ public abstract class EnemyBehaviour : MonoBehaviour
     /// </summary>
     protected virtual void Move()
     {
-        if (isOnGround && distance >= damageZone * 0.35f)
+        if (isOnGround && distance >= damageZone)
         {
-            transform.Translate(speed * Time.deltaTime * Vector3.forward); //direction);
+            transform.Translate(speed * Time.deltaTime * Vector3.forward);
         }
         
     }
 
     /// <summary>
-    /// Damage dealing method. To be overwritten
+    /// Damage dealing method. To be called in child class
     /// </summary>
-    protected abstract void DealDamage();
+    protected void DealDamage()
+    {
+        if (!dealingDamage)
+        {
+            InvokeRepeating("DamageDealer", 0f, attackRate);
+            dealingDamage = true;
+        }
+
+    }
+
+    protected void StopDealingDamage()
+    {
+        CancelInvoke();
+        dealingDamage = false;
+    }
+
+    /// <summary>
+    /// Damage dealer metod. To be called repeatedly from DealDamageIfReady() method
+    /// </summary>
+    protected virtual void DamageDealer()
+    {
+        Player.Instance.health -= damage * level;
+    }
 
     /// <summary>
     /// Damage intake method. To be overwritten
     /// </summary>
-    protected abstract void GetDamage(int damage);
+    public abstract void GetDamage(int damage);
 
     /// <summary>
     /// General attacking behavoiur
     /// </summary>
-    protected virtual void Attack()
+    protected virtual void Charge()
     {
-        if (!hasAttacked)
+        if (readyToCharge)
         {
             EnemyRB.AddForce(direction * chargeForce, ForceMode.Impulse);
             EnemyRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            hasAttacked = true;
+            readyToCharge = false;
             isOnGround = false;
         }
-            
     }
 
     /// <summary>
@@ -82,19 +104,24 @@ public abstract class EnemyBehaviour : MonoBehaviour
     }
 
     /// <summary>
-    /// Keeps enemy faced towards player when necessary
+    /// Updates distance direction.
+    /// Basically works as an enemy perception
     /// </summary>
-    protected void FaceTowardsPlayer()
+    protected void SeekPlayer()
     {
-        transform.eulerAngles = new Vector3(0f, direction.y, 0f);
+        Vector3 PlayerPosition = Player.Instance.transform.position;
+        Vector3 EnemyPosition = transform.position;
+
+        direction = (PlayerPosition - EnemyPosition).normalized;
+        distance = (PlayerPosition - EnemyPosition).magnitude;
+        
     }
 
     /// <summary>
-    /// Enemy behavior when colliding woth player
+    /// Check wether enemy touches the ground
     /// </summary>
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
-
         if (collision.gameObject.CompareTag("Terrain"))
         {
             isOnGround = true;

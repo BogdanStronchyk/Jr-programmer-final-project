@@ -17,50 +17,39 @@ public class Walker : EnemyBehaviour
         attackRate = 0.5f;
     }
 
-    protected override void GetDamage(int damage)
+    public override void GetDamage(int damage)
     {
         health -= damage;
     }
 
-    protected override void DealDamage()
-    {
-        Player.Instance.health -= damage * level;
-    }
-
-    
-
     // Update is called once per frame
     void Update()
     {
-        direction = (Player.Instance.transform.position - transform.position).normalized;
-        distance = (Player.Instance.transform.position - transform.position).magnitude;
-        transform.LookAt(Player.Instance.transform);
-        if (distance > damageZone)
-        {
-            CancelInvoke(); // cancelling damage dealing when leaving the damage zone
-            hasAttacked = false;
-            dealingDamage = false;
-        }
+        SeekPlayer();
 
         if (distance <= perceprionRange)
         {
+            transform.LookAt(Player.Instance.transform);
             Move();
-            
-            if (distance <= chargeZone)
+
+            if (distance > chargeZone)
             {
-                Attack();
+                readyToCharge = true;
+            }
+            else
+            {
+                Charge();
             }
 
-            else if (distance <= damageZone)
+            if (distance <= damageZone)
             {
-                if (!dealingDamage)
-                {
-                    InvokeRepeating("DealDamage", 0f, attackRate);
-                    dealingDamage = true;
-                }
+                DealDamage();
+            }
+            else
+            {
+                StopDealingDamage();
             }
         }
-            
 
         CheckHealth();
     }

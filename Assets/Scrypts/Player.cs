@@ -35,7 +35,11 @@ public class Player : MonoBehaviour
     {
         get { return m_health; }
         set
-        {        
+        {   
+            if (value < 0)
+            {
+                return;
+            }
             m_health = value;
         }
     }
