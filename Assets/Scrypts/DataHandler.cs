@@ -25,7 +25,8 @@ public class DataHandler : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        if(gameObject.activeInHierarchy)
+            DontDestroyOnLoad(gameObject);
     }
 
     [Serializable]

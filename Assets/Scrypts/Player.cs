@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     }
 
     // Player health incapsulation and clamping between 100 and 0
-    [SerializeField] int m_health = 100;
+    private int m_health = 100;
     public int health 
     {
         get { return m_health; }
@@ -45,14 +45,14 @@ public class Player : MonoBehaviour
     }
 
     public static Player Instance { get; private set; }
+    public Gun firearm;
 
-    [SerializeField] float Sensitivity = 1;
-    [SerializeField] float movementSpeed = 5;
+    private float Sensitivity = 1;
+    private float movementSpeed = 5;
 
     private Camera Camera;
     private GameObject focalPoint;
     private GameObject Gun;
-    private FireScrypt fireScrypt;
     private bool isAlive = true;
     
     void Start()
@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
         Instance = this;
         focalPoint = GameObject.Find("FocalPoint");
         Gun = GameObject.Find("GunMount");
-        fireScrypt = GetComponent<FireScrypt>();
+        firearm = GameObject.Find("Gun").GetComponent<Gun>();
         Camera = FindObjectOfType<Camera>();
     }
 
@@ -102,11 +102,11 @@ public class Player : MonoBehaviour
 
             if (Input.GetKey(KeyCode.Mouse0))
             {
-                fireScrypt.Fire();
+                firearm.Fire();
             }
             else if (!Input.GetKey(KeyCode.Mouse0))
             {
-                fireScrypt.HoldFire();
+                firearm.HoldFire();
             }
         }
         else
@@ -114,7 +114,12 @@ public class Player : MonoBehaviour
             Camera.transform.localPosition = new Vector3(3f, 0.2f, -3.5f);
             Camera.fieldOfView = 60;
             Gun.transform.localEulerAngles = new Vector3(90f, 0, 0f);
-            fireScrypt.HoldFire();
+            firearm.HoldFire();
+        }
+
+        if (Input.GetKey(KeyCode.R))
+        {
+            firearm.Reload();
         }
     }
 
