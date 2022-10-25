@@ -6,9 +6,11 @@ public class FireScrypt : MonoBehaviour
 {
 
     public float fireRate;
-    public float blowback = 10;
+    public float ammo = 30;
     private bool isShooting;
     private int damage = 10;
+
+
 
     private void Shot()
     {
@@ -19,8 +21,6 @@ public class FireScrypt : MonoBehaviour
             // if player doesn't shot the ground, because it doesn't have rigidbody
             if (hit.rigidbody != null && hit.rigidbody.CompareTag("Enemy"))
             {
-                //hit.rigidbody.AddForce(gameObject.transform.localEulerAngles.normalized * blowback);
-                //Debug.Log($"You hit {hit.rigidbody.name}");
                 EnemyBehaviour Enemy =  hit.rigidbody.gameObject.GetComponent<EnemyBehaviour>();
                 Enemy.GetDamage(damage);
             }

@@ -15,13 +15,13 @@ public class UIManager : MonoBehaviour
 {
 
     public TMP_InputField InputField;
-    //public TextMeshProUGUI BestScoreText;
+    public TextMeshProUGUI BestScoreText;
     public GameObject NoNameText;
 
     private void Start()
     {
         DataHandler.Instance.Load();
-        //BestScoreText.text = $"Best score: {DataHandler.Instance.Name} : {DataHandler.Instance.BestScore}";
+        BestScoreText.text = $"Best score: {DataHandler.Instance.Name} : {DataHandler.Instance.BestScore}";
     }
 
     public void StartNew()

@@ -7,7 +7,6 @@ public class TableUI : MonoBehaviour
 {
     public GameObject canvas;
     public TextMeshProUGUI PlaceInListTemplate;
-    public GameObject Buttons;
 
     
     void Start()
