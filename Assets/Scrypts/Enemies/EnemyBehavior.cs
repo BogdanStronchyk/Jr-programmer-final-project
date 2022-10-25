@@ -53,7 +53,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
     {
         if (!dealingDamage)
         {
-            InvokeRepeating("DamageDealer", 0f, attackRate);
+            InvokeRepeating("DamageDealer", 0.3f, attackRate);
             dealingDamage = true;
         }
 
