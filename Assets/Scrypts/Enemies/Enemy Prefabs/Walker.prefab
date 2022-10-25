@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 6475455578325118653}
   - component: {fileID: 6475455578325118646}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: Walker
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
