@@ -13,15 +13,12 @@ public class AssalutRifle : Gun
         currentAmmo = 30;
         damage = 3;
         reloadTime = 3f;
+        isAutomatic = true;
     }
 
     public override void Fire()
     {
-        if (isShooting)
-        {
-            InvokeRepeating("Shot", 0f, fireRate);
-            isShooting = false;
-        }
+        InvokeRepeating("Shot", 0f, fireRate);
 
         if (currentAmmo == 0)
         {

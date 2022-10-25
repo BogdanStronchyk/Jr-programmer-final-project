@@ -92,7 +92,7 @@ public class Player : MonoBehaviour
 
     }
 
-    private void GunzUp()
+    private void Aiming()
     {
         if (Input.GetKey(KeyCode.Mouse1))
         {
@@ -100,14 +100,17 @@ public class Player : MonoBehaviour
             Camera.fieldOfView = 30;
             Gun.transform.localEulerAngles = focalPoint.transform.localEulerAngles;
 
-            if (Input.GetKey(KeyCode.Mouse0))
+
+            if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 firearm.Fire();
             }
-            else if (!Input.GetKey(KeyCode.Mouse0))
+
+            if (Input.GetKeyUp(KeyCode.Mouse0) && firearm.isAutomatic)
             {
                 firearm.HoldFire();
             }
+
         }
         else
         {
@@ -157,7 +160,7 @@ public class Player : MonoBehaviour
             // ABSTRACTION EXAMPLE
             LookAround();
             Move();
-            GunzUp();
+            Aiming();
         }
     }
 }

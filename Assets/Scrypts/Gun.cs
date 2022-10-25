@@ -9,10 +9,11 @@ public abstract class Gun : MonoBehaviour
 {
     protected float fireRate;
     protected float reloadTime;
-    protected float maxAmmo;
     protected bool isShooting;
     protected int damage;
     public string GunType { get; set; }
+    public float maxAmmo;
+    public bool isAutomatic;
 
     private float m_currentAmmo;
     public float currentAmmo
@@ -37,7 +38,6 @@ public abstract class Gun : MonoBehaviour
     /// </summary>
     protected void Shot()
     {
-        currentAmmo -= 1;
         if (currentAmmo > 0)
         {
             Ray ray = FindObjectOfType<Camera>().ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
@@ -51,6 +51,7 @@ public abstract class Gun : MonoBehaviour
                     Enemy.GetDamage(damage);
                 }
             }
+            currentAmmo -= 1;
         }
     }
 
@@ -69,6 +70,9 @@ public abstract class Gun : MonoBehaviour
         isShooting = true;
     }
 
+    /// <summary>
+    /// Reloading method. Same to any type of firearm
+    /// </summary>
     public void Reload()
     {
         if (currentAmmo < maxAmmo)
@@ -78,9 +82,24 @@ public abstract class Gun : MonoBehaviour
             
     }
 
+    /// <summary>
+    /// Reloading timer
+    /// </summary>
+    /// <returns></returns>
     IEnumerator ReloadTimer()
     {
         yield return new WaitForSeconds(reloadTime);
         currentAmmo = maxAmmo;
     }
+
+    /// <summary>
+    /// Shot delay for single-shot firearms to prevent rapid fire
+    /// </summary>
+    /// <returns></returns>
+    protected IEnumerator ShotDelay()
+    {
+        yield return new WaitForSeconds(fireRate);
+        isShooting = true;
+    }
+
 }
