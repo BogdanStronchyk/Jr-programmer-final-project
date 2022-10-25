@@ -43,24 +43,51 @@ public class Player : MonoBehaviour
             m_health = value;
         }
     }
+    private int m_gunIndex;
+    
 
     public static Player Instance { get; private set; }
+    public List<Gun> firearms = new List<Gun>(2);
     public Gun firearm;
+
+    public int gunIndex
+    {
+        get { return m_gunIndex; }
+        set
+        {
+            if (value > firearms.Count - 1)
+            {
+                m_gunIndex = 0;
+            }
+            else if (value < 0)
+            {
+                m_gunIndex = firearms.Count - 1;
+            }
+            else
+            {
+                m_gunIndex = value;
+            }
+        }
+
+    }
 
     private float Sensitivity = 1;
     private float movementSpeed = 5;
+
+    
 
     private Camera Camera;
     private GameObject focalPoint;
     private GameObject Gun;
     private bool isAlive = true;
     
-    void Start()
+    void Awake()
     {
         Instance = this;
         focalPoint = GameObject.Find("FocalPoint");
         Gun = GameObject.Find("GunMount");
-        firearm = FindObjectOfType<Gun>();
+        gunIndex = Random.Range(0, firearms.Count);
+        InitialFirearm();
         Camera = FindObjectOfType<Camera>();
     }
 
@@ -90,6 +117,27 @@ public class Player : MonoBehaviour
             transform.Translate(directionRightLeft * Time.deltaTime * movementSpeed);
         }
 
+    }
+
+    private void InitialFirearm()
+    {
+        firearms.Add(GameObject.Find("Shotgun").GetComponent<Gun>());
+        firearms.Add(GameObject.Find("Handgun").GetComponent<Gun>());
+        firearms.Add(GameObject.Find("Assalut rifle").GetComponent<Gun>());
+        foreach (Gun firearm in firearms)
+        {
+            firearm.gameObject.SetActive(false);
+        }
+        firearm = firearms[gunIndex];
+        firearm.gameObject.SetActive(true);
+    }
+
+    private void ChangeFirearm()
+    {
+        firearm.gameObject.SetActive(false);
+        Debug.Log(gunIndex);
+        firearm = firearms[gunIndex];
+        firearm.gameObject.SetActive(true);
     }
 
     private void Aiming()
@@ -124,6 +172,18 @@ public class Player : MonoBehaviour
         {
             firearm.Reload();
         }
+
+        if (Input.mouseScrollDelta.magnitude > 0)
+        {
+            gunIndex ++;
+            ChangeFirearm();
+        }
+        else if (Input.mouseScrollDelta.magnitude < 0)
+        {
+            gunIndex --;
+            ChangeFirearm();
+        }
+
     }
 
 
