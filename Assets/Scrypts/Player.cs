@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
         Instance = this;
         focalPoint = GameObject.Find("FocalPoint");
         Gun = GameObject.Find("GunMount");
-        firearm = GameObject.Find("Gun").GetComponent<Gun>();
+        firearm = FindObjectOfType<Gun>();
         Camera = FindObjectOfType<Camera>();
     }
 
