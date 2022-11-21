@@ -22,35 +22,48 @@ public class Walker : EnemyBehaviour
         health -= damage;
     }
 
+    protected override void CheckHealth()
+    {
+        if (health <= 0)
+        {
+            isDead = true;
+            gameObject.SetActive(false);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-        SeekPlayer();
-
-        if (distance <= perceprionRange)
+        CheckHealth();
+        if (!isDead)
         {
-            transform.LookAt(Player.Instance.transform);
-            Move();
+            SeekPlayer();
 
-            if (distance > chargeZone)
+            if (distance <= perceprionRange)
             {
-                readyToCharge = true;
-            }
-            else
-            {
-                Charge();
-            }
+                transform.LookAt(Player.Instance.transform);
+                Move();
 
-            if (distance <= damageZone)
-            {
-                DealDamage();
-            }
-            else
-            {
-                StopDealingDamage();
+                if (distance > chargeZone)
+                {
+                    readyToCharge = true;
+                }
+                else
+                {
+                    Charge();
+                }
+
+                if (distance <= damageZone)
+                {
+                    DealDamage();
+                }
+                else
+                {
+                    StopDealingDamage();
+                }
             }
         }
 
-        CheckHealth();
+        
     }
 }

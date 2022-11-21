@@ -26,6 +26,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
     protected bool readyToCharge = false;
     protected bool dealingDamage = false;
     protected bool isOnGround = false;
+    public bool isDead = false;
 
     public int level = 1;
 
@@ -95,13 +96,8 @@ public abstract class EnemyBehaviour : MonoBehaviour
     /// <summary>
     /// Health check and death if less then 0
     /// </summary>
-    protected virtual void CheckHealth()
-    {
-        if (health <= 0)
-        {
-            gameObject.SetActive(false);
-        }
-    }
+    protected abstract void CheckHealth();
+    
 
     /// <summary>
     /// Updates distance direction.
