@@ -26,9 +26,10 @@ public abstract class EnemyBehaviour : MonoBehaviour
     protected bool readyToCharge = false;
     protected bool dealingDamage = false;
     protected bool isOnGround = false;
+    
     public bool isDead = false;
-
     public int level = 1;
+    public int score;
 
     private void Awake()
     {

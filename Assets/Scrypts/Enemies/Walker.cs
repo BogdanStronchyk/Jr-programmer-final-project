@@ -15,6 +15,7 @@ public class Walker : EnemyBehaviour
         health = 20;
         damage = 10;
         attackRate = 0.5f;
+        score = 10;
     }
 
     public override void GetDamage(int damage)
@@ -27,6 +28,7 @@ public class Walker : EnemyBehaviour
         if (health <= 0)
         {
             isDead = true;
+            Player.Instance.GetScore(score);
             gameObject.SetActive(false);
         }
     }

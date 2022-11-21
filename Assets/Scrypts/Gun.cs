@@ -62,7 +62,7 @@ public abstract class Gun : MonoBehaviour
 
 
     /// <summary>
-    /// Use this method to hold automatic fire, invoked repeatedly 
+    /// Use this method to hold automatic fire, when it's invoked repeatedly 
     /// </summary>
     public void HoldFire()
     {

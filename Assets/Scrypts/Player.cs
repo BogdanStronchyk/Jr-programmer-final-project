@@ -44,7 +44,8 @@ public class Player : MonoBehaviour
         }
     }
     private int m_gunIndex;
-    
+
+    public int Score { get; private set; }
 
     public static Player Instance { get; private set; }
     public List<Gun> firearms = new List<Gun>(2);
@@ -79,7 +80,7 @@ public class Player : MonoBehaviour
     private Camera Camera;
     private GameObject focalPoint;
     private GameObject Gun;
-    private bool isAlive = true;
+    public bool isAlive = true;
     
     void Awake()
     {
@@ -91,7 +92,7 @@ public class Player : MonoBehaviour
         Camera = FindObjectOfType<Camera>();
     }
 
-    public void Move()
+    private void Move()
     {
         Vector3 directionForward = Vector3.forward;
         directionForward.y = 0;
@@ -117,6 +118,11 @@ public class Player : MonoBehaviour
             transform.Translate(directionRightLeft * Time.deltaTime * movementSpeed);
         }
 
+    }
+
+    public void GetScore(int score)
+    {
+        Score += score;
     }
 
     private void InitialFirearm()

@@ -12,7 +12,7 @@ public class DataHandler : MonoBehaviour
     public string Name = "Player";
     public int BestScore = 0;
     
-    public List<SaveData> ScoreList = new List<SaveData>(10);
+    public List<SaveData> ScoreList;
 
     string path;
 
@@ -25,6 +25,7 @@ public class DataHandler : MonoBehaviour
             return;
         }
         Instance = this;
+
         if(gameObject.activeInHierarchy)
             DontDestroyOnLoad(gameObject);
     }
@@ -48,8 +49,7 @@ public class DataHandler : MonoBehaviour
     public void SaveScoreToList()
     {
         // creating a new player data container instance
-        SaveData data = new SaveData(); 
-
+        SaveData data = new SaveData();
         // saving player's data
         data.HighScore = BestScore;
         data.PlayerName = Name;
