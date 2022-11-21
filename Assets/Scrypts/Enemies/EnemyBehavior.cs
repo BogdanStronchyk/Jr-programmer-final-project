@@ -80,7 +80,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
     /// </summary>
     public virtual void GetScore()
     {
-        Player.Instance.score += scoreForEnemy * level;
+        Player.Instance.Score += scoreForEnemy * level;
     }
 
     /// <summary>
