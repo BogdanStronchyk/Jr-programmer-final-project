@@ -35,7 +35,6 @@ public class SpawnManager : MonoBehaviour
         {
             SpawnEnemies(waveCounter);
             waveCounter += 1;
-            Debug.Log(waveCounter);
         }
         
         if (waveCounter <= waves)

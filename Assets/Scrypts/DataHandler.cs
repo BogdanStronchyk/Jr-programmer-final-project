@@ -105,7 +105,6 @@ public class DataHandler : MonoBehaviour
             json += JsonUtility.ToJson(dataset);
             json += '\n';
         }
-        Debug.Log(json);
         File.WriteAllText(path, json);
     }
 

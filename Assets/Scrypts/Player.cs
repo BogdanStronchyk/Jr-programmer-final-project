@@ -141,7 +141,6 @@ public class Player : MonoBehaviour
     private void ChangeFirearm()
     {
         firearm.gameObject.SetActive(false);
-        Debug.Log(gunIndex);
         firearm = firearms[gunIndex];
         firearm.gameObject.SetActive(true);
     }
