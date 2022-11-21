@@ -7,13 +7,31 @@ using UnityEngine;
 /// </summary>
 public abstract class Gun : MonoBehaviour
 {
+    [Header("General stats")]
     protected float fireRate;
     protected float reloadTime;
     protected bool isShooting;
     protected int damage;
+    protected int bulletsPerShot;
+
+    protected float m_inaccuracy;
+    public float inaccuracy 
+    { 
+        get 
+        {
+            return m_inaccuracy;
+        }
+        set
+        {
+            if (value > 0.1f || value < 0.01f)
+            {
+                m_inaccuracy = Mathf.Clamp(value, 0.01f, 0.1f);
+            }
+        }
+    }
     public string GunType { get; set; }
-    public float maxAmmo;
-    public bool isAutomatic;
+    public float maxAmmo { get; set; }
+    public bool isAutomatic { get; set; }
 
     private float m_currentAmmo;
     public float currentAmmo
@@ -33,26 +51,79 @@ public abstract class Gun : MonoBehaviour
         }
     }
 
+
+    public List<Vector3> hitPointCoords;
     /// <summary>
     /// The shot event itself; raycasting is used for the sake of simplicity
     /// </summary>
-    protected void Shot()
+    protected virtual void Shot()
     {
+        hitPointCoords.Clear();
         if (currentAmmo > 0)
         {
-            Ray ray = FindObjectOfType<Camera>().ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
+            Ray ray = FindObjectOfType<Camera>().ViewportPointToRay(GetBulletDirection());
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                // if player doesn't shot the ground, because it doesn't have rigidbody
                 if (hit.rigidbody != null && hit.rigidbody.CompareTag("Enemy"))
                 {
                     EnemyBehaviour Enemy = hit.rigidbody.gameObject.GetComponent<EnemyBehaviour>();
                     Enemy.GetDamage(damage);
+                    Enemy.GetScore();
+                }
+
+                else if (hit.collider.CompareTag("Terrain"))
+                {
+                    hitPointCoords.Add(hit.point);
                 }
             }
             currentAmmo -= 1;
         }
+    }
+
+    protected virtual void Shot(int rays)
+    {
+        if (currentAmmo > 0)
+        {
+
+            for (int i = 0; i < rays; i++)
+            {
+
+                Ray ray = FindObjectOfType<Camera>().ViewportPointToRay(GetBulletDirection());
+                
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit))
+                {
+                    // if player doesn't shot the ground, because it doesn't have rigidbody
+                    if (hit.rigidbody != null && hit.rigidbody.CompareTag("Enemy"))
+                    {
+                        EnemyBehaviour Enemy = hit.rigidbody.gameObject.GetComponent<EnemyBehaviour>();
+                        Enemy.GetDamage(damage);
+                        Enemy.GetScore();
+                    }
+
+                    else if (hit.collider.CompareTag("Terrain"))
+                    {
+                        hitPointCoords.Add(hit.point);
+                    }
+                }
+            }
+            currentAmmo -= 1;
+        }
+    }
+
+    Vector3 GetBulletDirection()
+    {
+        Vector3 targetPos = new Vector3(0.5f, 0.5f, 0);
+
+        targetPos = new Vector3
+            (
+                targetPos.x + Random.Range(-inaccuracy, inaccuracy),
+                targetPos.y + Random.Range(-inaccuracy, inaccuracy),
+                0f
+            );
+        return targetPos;
     }
 
     /// <summary>

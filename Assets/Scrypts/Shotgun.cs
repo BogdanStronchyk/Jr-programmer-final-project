@@ -13,13 +13,15 @@ public class Shotgun : Gun
         currentAmmo = 2;
         damage = 20;
         reloadTime = 4f;
+        inaccuracy = 0.05f;
+        bulletsPerShot = 8;
     }
 
     public override void Fire()
     {
         if (isShooting)
         {
-            Shot();
+            Shot(bulletsPerShot);
             isShooting = false;
             StartCoroutine(ShotDelay());
         }

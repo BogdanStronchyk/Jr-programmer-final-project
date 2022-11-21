@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
             m_health = value;
         }
     }
+<<<<<<< Updated upstream
     private int m_gunIndex;
 
     public int Score { get; private set; }
@@ -50,7 +51,11 @@ public class Player : MonoBehaviour
     public static Player Instance { get; private set; }
     public List<Gun> firearms = new List<Gun>(2);
     public Gun firearm;
+=======
+>>>>>>> Stashed changes
 
+    // Gun index in the list
+    private int m_gunIndex;
     public int gunIndex
     {
         get { return m_gunIndex; }
@@ -71,6 +76,12 @@ public class Player : MonoBehaviour
         }
 
     }
+
+    public static Player Instance { get; private set; }
+    public List<Gun> firearms = new List<Gun>(2);
+    public Gun firearm;
+    public int score;
+    
 
     private float Sensitivity = 1;
     private float movementSpeed = 5;

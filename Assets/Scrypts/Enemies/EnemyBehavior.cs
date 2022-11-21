@@ -8,7 +8,7 @@ using UnityEngine;
 /// </summary>
 public abstract class EnemyBehaviour : MonoBehaviour
 {
-    
+    protected int scoreForEnemy;
     protected int damage;
     protected int health; // enemy health
 
@@ -73,6 +73,14 @@ public abstract class EnemyBehaviour : MonoBehaviour
     protected virtual void DamageDealer()
     {
         Player.Instance.health -= damage * level;
+    }
+
+    /// <summary>
+    /// Get score for killing an enemy
+    /// </summary>
+    public virtual void GetScore()
+    {
+        Player.Instance.score += scoreForEnemy * level;
     }
 
     /// <summary>
