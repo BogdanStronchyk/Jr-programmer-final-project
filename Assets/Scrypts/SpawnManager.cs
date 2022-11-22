@@ -7,11 +7,12 @@ public class SpawnManager : MonoBehaviour
     public GameObject enemy;
     private int waves = 7;
     private int waveCounter = 0;
-    [SerializeField] List<GameObject> enemies = new List<GameObject>();
+    private bool spawnWave = true;
+    [SerializeField] List<GameObject> enemies;
 
     private Vector3 GetRandomPosition()
     {
-        Vector3 playerPosition = FindObjectOfType<Player>().transform.position;
+        Vector3 playerPosition = Player.Instance.transform.position;
         float posX = Random.Range(-9f, 9f);
         float posZ = Random.Range(-9f, 9f);
         return new(playerPosition.x + posX, 1f, playerPosition.z + posZ);
@@ -19,31 +20,44 @@ public class SpawnManager : MonoBehaviour
 
     void SpawnEnemies(int wave)
     {
-        int i;
-        for (i = 0; i <= wave; i++)
+        for (int i = 0; i < wave; i++)
         {
-            Instantiate(enemy, GetRandomPosition(), enemy.transform.rotation);
-            enemies.Add(enemy);
+            Vector3 position = GetRandomPosition();
+            GameObject enemyObj = Instantiate(enemy, position, Quaternion.identity);
+            enemies.Add(enemyObj);
+            enemyObj.SetActive(true);
         }
+        
         
     }
 
     void Update()
     {
-
-        if (enemies.Count == 0 && waveCounter < waves)
+        if (spawnWave == true && waveCounter < waves)
         {
-            SpawnEnemies(waveCounter);
             waveCounter += 1;
+            SpawnEnemies(waveCounter);
+            spawnWave = false;
         }
-        
-        if (waveCounter <= waves)
+
+        foreach (GameObject obj in enemies)
         {
-            var enemyObject = FindObjectOfType<EnemyBehaviour>();
-            if (enemyObject == null)
+            spawnWave = true;
+            if (obj.activeInHierarchy)
             {
-                enemies.Clear();
+                spawnWave = false;
+                break;
             }
         }
+        
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            if (!enemies[i].activeInHierarchy)
+            {
+                Destroy(enemies[i]);
+                enemies.RemoveAt(i);
+            }
+        }
+
     }
 }
