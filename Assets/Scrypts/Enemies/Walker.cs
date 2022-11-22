@@ -8,14 +8,16 @@ using UnityEngine;
 public class Walker : EnemyBehaviour
 {
 
-    // Start is called before the first frame update
-    void Start()
+    // On enable function is used instead of start function
+    // for correct operation of object pooling
+    void OnEnable()
     {
         speed = 3f;
         health = 20;
         damage = 10;
         attackRate = 0.5f;
         score = 10;
+        isDead = false;
     }
 
     public override void GetDamage(int damage)
@@ -39,6 +41,7 @@ public class Walker : EnemyBehaviour
         CheckHealth();
         if (!isDead)
         {
+            
             SeekPlayer();
 
             if (distance <= perceprionRange)

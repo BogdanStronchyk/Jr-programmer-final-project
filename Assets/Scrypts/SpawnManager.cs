@@ -10,6 +10,11 @@ public class SpawnManager : MonoBehaviour
     private bool spawnWave = true;
     [SerializeField] List<GameObject> enemies;
 
+    private void Awake()
+    {
+        ObjectPooler.current.pooledAmount = waves;
+    }
+
     private Vector3 GetRandomPosition()
     {
         Vector3 playerPosition = Player.Instance.transform.position;
@@ -22,13 +27,10 @@ public class SpawnManager : MonoBehaviour
     {
         for (int i = 0; i < wave; i++)
         {
-            Vector3 position = GetRandomPosition();
-            GameObject enemyObj = Instantiate(enemy, position, Quaternion.identity);
-            enemies.Add(enemyObj);
+            GameObject enemyObj = ObjectPooler.current.GetPooledObject();
+            enemyObj.transform.position = GetRandomPosition();
             enemyObj.SetActive(true);
         }
-        
-        
     }
 
     void Update()
@@ -40,22 +42,13 @@ public class SpawnManager : MonoBehaviour
             spawnWave = false;
         }
 
-        foreach (GameObject obj in enemies)
+        foreach (GameObject obj in ObjectPooler.current.pooledObjects)
         {
             spawnWave = true;
             if (obj.activeInHierarchy)
             {
                 spawnWave = false;
                 break;
-            }
-        }
-        
-        for (int i = 0; i < enemies.Count; i++)
-        {
-            if (!enemies[i].activeInHierarchy)
-            {
-                Destroy(enemies[i]);
-                enemies.RemoveAt(i);
             }
         }
 
