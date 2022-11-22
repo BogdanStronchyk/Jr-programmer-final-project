@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public GameObject enemy;
     private int waves = 7;
     private int waveCounter = 0;
     private bool spawnWave = true;
-    [SerializeField] List<GameObject> enemies;
 
     private void Awake()
     {
