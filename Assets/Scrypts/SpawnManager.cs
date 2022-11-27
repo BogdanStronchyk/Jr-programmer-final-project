@@ -25,7 +25,7 @@ public class SpawnManager : MonoBehaviour
     {
         for (int i = 0; i < wave; i++)
         {
-            GameObject enemyObj = ObjectPooler.current.GetPooledObject();
+            GameObject enemyObj = ObjectPooler.current.GetPooledObject(0);
             enemyObj.transform.position = GetRandomPosition();
             enemyObj.SetActive(true);
         }
@@ -40,7 +40,7 @@ public class SpawnManager : MonoBehaviour
             spawnWave = false;
         }
 
-        foreach (GameObject obj in ObjectPooler.current.pooledObjects)
+        foreach (GameObject obj in ObjectPooler.current.pooledObjects1)
         {
             spawnWave = true;
             if (obj.activeInHierarchy)

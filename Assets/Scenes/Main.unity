@@ -229,7 +229,7 @@ PrefabInstance:
     - target: {fileID: 5951098631465360451, guid: ac7e7eeb44a08fe4d96cfe3c11298c83,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.73
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 5951098631465360451, guid: ac7e7eeb44a08fe4d96cfe3c11298c83,
         type: 3}
@@ -770,11 +770,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f5d044c69e93a94c8ce460676e998be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pooledObject: {fileID: 6475455578325118652, guid: c53e09029cdeb224ebecb868abe761fc,
-    type: 3}
+  pooledObject1: {fileID: 0}
+  pooledObject2: {fileID: 0}
+  pooledObject3: {fileID: 0}
   pooledAmount: 0
   willGrow: 1
-  pooledObjects: []
+  pooledObjects1: []
+  pooledObjects2: []
 --- !u!4 &413974495
 Transform:
   m_ObjectHideFlags: 0
@@ -1574,6 +1576,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &997659836
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 997659837}
+  m_Layer: 0
+  m_Name: Collectable spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &997659837
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997659836}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.2600002, y: 2.6554244, z: -3.6415937}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1009186432
 GameObject:
   m_ObjectHideFlags: 0
@@ -2223,8 +2256,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94e52209a4274554b9748fce2ab6ed57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 6475455578325118652, guid: c53e09029cdeb224ebecb868abe761fc, type: 3}
-  enemies: []
 --- !u!4 &1603307190
 Transform:
   m_ObjectHideFlags: 0
