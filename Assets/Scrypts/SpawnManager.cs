@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    private int waves = 7;
-    private int waveCounter = 0;
+    public static SpawnManager Instance;
+    public int waveCounter = 0;
+    public int waves = 7;
+    public bool gameWon = false;
+
     private bool spawnWave = true;
 
     private void Awake()
     {
+        Instance = this;
         ObjectPooler.current.pooledAmount = waves;
     }
 
@@ -33,22 +37,39 @@ public class SpawnManager : MonoBehaviour
 
     void Update()
     {
-        if (spawnWave == true && waveCounter < waves)
-        {
-            waveCounter += 1;
-            SpawnEnemies(waveCounter);
-            spawnWave = false;
-        }
+        //if (spawnWave == true && waveCounter < waves)
+        //{
+        //    waveCounter += 1;
+        //    SpawnEnemies(waveCounter);
+        //    spawnWave = false;
+        //}
 
+        // counting active enemies
+        int i = 0;
         foreach (GameObject obj in ObjectPooler.current.pooledObjects1)
         {
-            spawnWave = true;
             if (obj.activeInHierarchy)
             {
-                spawnWave = false;
-                break;
+                i++;
             }
         }
 
+        // if we killed everyone and it's a last wave - we won!
+        if (i == 0 && waveCounter == waves)
+        {
+            gameWon = true;
+        }
+
+        // if we killed everyone and it's not a last wave - spawn another wave!
+        else if (i == 0 && waveCounter < waves)
+        {
+            spawnWave = true;
+        }
+
+        // spawn no one if there's at least one active enemy
+        else if (i > 0)
+        {
+            spawnWave = false;
+        }
     }
 }

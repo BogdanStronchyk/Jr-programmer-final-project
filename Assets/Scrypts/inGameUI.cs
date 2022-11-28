@@ -12,11 +12,13 @@ public class inGameUI : MonoBehaviour
 {
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI ammoText;
+    public TextMeshProUGUI AvailableAmmoText;
     public TextMeshProUGUI GunText;
     public TextMeshProUGUI scoreText;
     public GameObject GameUI;
     public GameObject Crosshair;
     public GameObject GameOverUI;
+    public GameObject GameWonUI;
 
     public void Retry()
     {
@@ -42,6 +44,7 @@ public class inGameUI : MonoBehaviour
         ammoText.text = $"{Player.Instance.firearm.currentAmmo}/{Player.Instance.firearm.maxAmmo}";
         GunText.text = $"{Player.Instance.firearm.GunType}";
         scoreText.text = $"Score: {Player.Instance.Score}";
+        AvailableAmmoText.text = $"Ammo available: {Player.Instance.ammunition}";
     }
 
     // Update is called once per frame
@@ -56,6 +59,13 @@ public class inGameUI : MonoBehaviour
             GameUI.SetActive(false);
             Crosshair.SetActive(false);
             GameOverUI.SetActive(true);
+        }
+
+        if (SpawnManager.Instance.gameWon)
+        {
+            GameUI.SetActive(false);
+            Crosshair.SetActive(false);
+            GameWonUI.SetActive(true);
         }
 
     }

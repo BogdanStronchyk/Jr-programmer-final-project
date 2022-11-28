@@ -14,6 +14,11 @@ public abstract class Gun : MonoBehaviour
     protected int damage;
     protected int bulletsPerShot;
 
+    [Header("Reloading flags")]
+    private bool gunDry = false;
+    private bool gunSemidry = false;
+    private bool haveMag = false;
+
     protected float m_inaccuracy;
     public float inaccuracy 
     { 
@@ -29,12 +34,15 @@ public abstract class Gun : MonoBehaviour
             }
         }
     }
+
     public string GunType { get; set; }
-    public float maxAmmo { get; set; }
+    public int maxAmmo { get; set; }
+
+    public bool reloading;
     public bool isAutomatic { get; set; }
 
-    private float m_currentAmmo;
-    public float currentAmmo
+    private int m_currentAmmo;
+    public int currentAmmo
     {
         get { return m_currentAmmo; }
         set
@@ -53,6 +61,8 @@ public abstract class Gun : MonoBehaviour
 
 
     public List<Vector3> hitPointCoords;
+
+
     /// <summary>
     /// The shot event itself; raycasting is used for the sake of simplicity
     /// </summary>
@@ -146,27 +156,106 @@ public abstract class Gun : MonoBehaviour
     /// </summary>
     public void Reload()
     {
-        if (currentAmmo < maxAmmo)
+        if (currentAmmo < maxAmmo && Player.Instance.ammunition > 0 && !reloading)
         {
-            StartCoroutine(ReloadTimer());
+            StartCoroutine(DelayedReload());
+            reloading = true;
+        }  
+    }
+
+    private void GunStateCheck()
+    {
+        // checking the state of the gun
+        if (currentAmmo == maxAmmo)
+        {
+            gunDry = false;
+            gunSemidry = false;
         }
-            
+        else if (currentAmmo < maxAmmo && currentAmmo > 0)
+        {
+            gunDry = false;
+            gunSemidry = true;
+        }
+        else if (currentAmmo == 0)
+        {
+            gunDry = true;
+            gunSemidry = false;
+        }
+
+        // checking if player have enough ammo to form at least 1 mag
+        if (Player.Instance.ammunition / maxAmmo >= 1)
+        {
+            haveMag = true;
+        }
+        else
+        {
+            haveMag = false;
+        }
+
+
+        
+    } 
+    private void GunReload()
+    {
+        if (haveMag)
+        {
+            if (gunDry)
+            {
+                Debug.Log($"Gun dry & have mag");
+                Player.Instance.ammunition -= maxAmmo;
+                currentAmmo = maxAmmo;
+            }
+
+            else if (gunSemidry)
+            {
+                Debug.Log($"Gun semidry & have mag");
+                Player.Instance.ammunition -= (maxAmmo - currentAmmo);
+                currentAmmo = maxAmmo;
+            }
+        }
+
+        else
+        {
+
+            if (gunDry)
+            {
+                Debug.Log($"No mag & dry");
+                currentAmmo += Player.Instance.ammunition;
+                Player.Instance.ammunition = 0;
+            }
+
+            if (gunSemidry)
+            {
+                Debug.Log($"No mag & semidry");
+                if (currentAmmo + Player.Instance.ammunition > maxAmmo)
+                {
+                    Player.Instance.ammunition -= (maxAmmo - currentAmmo);
+                    currentAmmo = maxAmmo;
+                }
+                else
+                {
+                    currentAmmo += Player.Instance.ammunition;
+                    Player.Instance.ammunition = 0;
+                }
+            }
+
+        }
     }
 
     /// <summary>
     /// Reloading timer
     /// </summary>
-    /// <returns></returns>
-    IEnumerator ReloadTimer()
+    IEnumerator DelayedReload()
     {
         yield return new WaitForSeconds(reloadTime);
-        currentAmmo = maxAmmo;
+        GunStateCheck();
+        GunReload();
+        reloading = false;
     }
 
     /// <summary>
     /// Shot delay for single-shot firearms to prevent rapid fire
     /// </summary>
-    /// <returns></returns>
     protected IEnumerator ShotDelay()
     {
         yield return new WaitForSeconds(fireRate);

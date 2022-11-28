@@ -10,7 +10,8 @@ public class ObjectPooler : MonoBehaviour
     public GameObject pooledObject2;
     public GameObject pooledObject3;
     public int pooledAmount = 0;
-    public bool willGrow = true;
+    public int pooledAmount1 = 0;
+    public bool willGrow = false;
 
     public List<GameObject> pooledObjects1;
     public List<GameObject> pooledObjects2;
@@ -33,9 +34,9 @@ public class ObjectPooler : MonoBehaviour
         if (pooledObject2 != null && pooledObject3 != null)
         {
             pooledObjects2 = new List<GameObject>();
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < pooledAmount1; i++)
             {
-                int num = Random.Range(0, 1);
+                int num = Random.Range(0, 2);
                 GameObject obj1 = null;
 
                 switch (num)
@@ -75,10 +76,22 @@ public class ObjectPooler : MonoBehaviour
 
             case 1:
                 pool = pooledObjects2;
-                pooledObject = pooledObject2;
+                int num = Random.Range(0, 2);
+
+                switch (num)
+                {
+                    case 0:
+                        pooledObject = pooledObject2;
+                        break;
+
+                    case 1:
+                        pooledObject = pooledObject3;
+                        break;
+                }
                 break;
         }
-        
+
+
         foreach (GameObject obj in pool)
         {
             if (!obj.activeInHierarchy)
@@ -86,7 +99,7 @@ public class ObjectPooler : MonoBehaviour
                 return obj;
             }
         }
-        
+
         if (willGrow)
         {
             GameObject obj = (GameObject)Instantiate(pooledObject);

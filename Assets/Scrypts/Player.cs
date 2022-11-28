@@ -43,14 +43,35 @@ public class Player : MonoBehaviour
             m_health = value;
         }
     }
-    private int m_gunIndex;
-
+    
     public int Score { get; set; }
+
+    private int m_ammunition = 0;
+    public int ammunition
+    {
+        get
+        {
+            return m_ammunition;
+        }
+
+        set
+        {
+            if (value < 0)
+            {
+                m_ammunition = 0;
+            }
+            else
+            {
+                m_ammunition = value;
+            }
+        }
+    }
 
     public static Player Instance { get; private set; }
     public List<Gun> firearms = new List<Gun>(2);
     public Gun firearm;
 
+    private int m_gunIndex;
     public int gunIndex
     {
         get { return m_gunIndex; }
@@ -173,7 +194,7 @@ public class Player : MonoBehaviour
             firearm.HoldFire();
         }
 
-        if (Input.GetKey(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             firearm.Reload();
         }
@@ -190,7 +211,6 @@ public class Player : MonoBehaviour
         }
 
     }
-
 
     public void LookAround()
     {

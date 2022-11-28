@@ -6,13 +6,14 @@ public class CollectableSpawner : MonoBehaviour
 {
     public GameObject HealingCollectable;
     public GameObject Ammo;
+    public int SpawnTimeMin = 1;
+    public int SpawnTimeMax = 3;
 
-    private int waves = 7;
     private bool ReadyToSpawn = true;
 
-    private void Awake()
+    private void Start()
     {
-        ObjectPooler.current.pooledAmount = waves;
+        ObjectPooler.current.pooledAmount1 = 9;
     }
 
     private Vector3 GetRandomPosition()
@@ -22,21 +23,24 @@ public class CollectableSpawner : MonoBehaviour
         return new(posX, 1f,posZ);
     }
 
-    void SpawnCollectables(int wave)
+    void SpawnCollectables(int amount)
     {
-        for (int i = 0; i < wave; i++)
+        for (int i = 0; i < amount; i++)
         {
-            GameObject enemyObj = ObjectPooler.current.GetPooledObject(1);
-            enemyObj.transform.position = GetRandomPosition();
-            enemyObj.SetActive(true);
+            GameObject obj = ObjectPooler.current.GetPooledObject(1);
+            if (obj == null) return;
+
+            obj.transform.position = GetRandomPosition();
+            obj.SetActive(true);
         }
     }
 
     void Update()
     {
+
         if (ReadyToSpawn)
         {
-            StartCoroutine(Timer(Random.Range(15, 30)));
+            StartCoroutine(Timer(Random.Range(SpawnTimeMin, SpawnTimeMax)));
             ReadyToSpawn = false;
         }
 
