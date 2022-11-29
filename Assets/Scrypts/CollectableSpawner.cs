@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CollectableSpawner : MonoBehaviour
 {
-    public int SpawnTimeMin = 1;
-    public int SpawnTimeMax = 3;
+    public int SpawnTimeMin = 10;
+    public int SpawnTimeMax = 20;
 
     private bool ReadyToSpawn = true;
 

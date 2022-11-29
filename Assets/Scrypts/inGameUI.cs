@@ -10,6 +10,8 @@ using UnityEngine.SceneManagement;
 
 public class inGameUI : MonoBehaviour
 {
+    public static inGameUI Instance;
+
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI ammoText;
     public TextMeshProUGUI AvailableAmmoText;
@@ -19,11 +21,20 @@ public class inGameUI : MonoBehaviour
     public GameObject Crosshair;
     public GameObject GameOverUI;
     public GameObject GameWonUI;
+    public GameObject PauseUI;
+    public bool isPaused;
 
+    private float prevTimeScale;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
     public void Retry()
     {
         SaveSessionData();
         SceneManager.LoadScene(1);
+        
     }
 
     public void ToScoreTable()
@@ -61,6 +72,15 @@ public class inGameUI : MonoBehaviour
             GameOverUI.SetActive(true);
         }
 
+        if (inGameUI.Instance.isPaused)
+        {
+            PauseUI.SetActive(true);
+        }
+        else
+        {
+            PauseUI.SetActive(false);
+        }
+
         if (SpawnManager.Instance.gameWon)
         {
             GameUI.SetActive(false);
@@ -69,4 +89,30 @@ public class inGameUI : MonoBehaviour
         }
 
     }
+
+    public void BackToMenu()
+    {
+        DataHandler.Instance.Name = "Player";
+        DataHandler.Instance.BestScore = 0;
+        SceneManager.LoadScene(0);
+    }
+
+    public void TogglePause()
+    {
+        if (Time.timeScale > 0)
+        {
+            prevTimeScale = Time.timeScale;
+            Time.timeScale = 0;
+            AudioListener.pause = true;
+            isPaused = true;
+        }
+        else if (Time.timeScale == 0)
+        {
+            Time.timeScale = prevTimeScale;
+            AudioListener.pause = false;
+            isPaused = false;
+        }
+    }
+
+
 }

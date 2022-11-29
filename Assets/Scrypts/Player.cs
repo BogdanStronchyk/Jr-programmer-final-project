@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
         get { return m_health; }
         set
         {   
-            if (value < 0 || m_health + value > 100)
+            if (value < 0)
             {
                 return;
             }
@@ -239,10 +239,11 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        HealthCheck();
-        if (isAlive)
+        
+        if (isAlive && !inGameUI.Instance.isPaused)
         {
             // ABSTRACTION EXAMPLE
+            HealthCheck();
             LookAround();
             Move();
             Aiming();

@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class DataHandler : MonoBehaviour
 {
-
     public static DataHandler Instance;
 
     public string Name = "Player";
@@ -142,5 +141,4 @@ public class DataHandler : MonoBehaviour
         Name = "Player";
         BestScore = 0;
     }
-
 }
