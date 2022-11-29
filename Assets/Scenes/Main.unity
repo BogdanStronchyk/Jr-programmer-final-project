@@ -206,71 +206,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 361163076543469298, guid: ac7e7eeb44a08fe4d96cfe3c11298c83,
-        type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 372994480967780180, guid: ac7e7eeb44a08fe4d96cfe3c11298c83,
-        type: 3}
-      propertyPath: m_Name
-      value: Audio Source Handgun
-      objectReference: {fileID: 0}
-    - target: {fileID: 754868840189439390, guid: ac7e7eeb44a08fe4d96cfe3c11298c83,
-        type: 3}
-      propertyPath: source
-      value: 
-      objectReference: {fileID: 212060990}
-    - target: {fileID: 754868840189439390, guid: ac7e7eeb44a08fe4d96cfe3c11298c83,
-        type: 3}
-      propertyPath: ShotSound
-      value: 
-      objectReference: {fileID: 8300000, guid: c6abc39f4ef669f499d72d5cfaddd6b9, type: 3}
-    - target: {fileID: 754868840189439390, guid: ac7e7eeb44a08fe4d96cfe3c11298c83,
-        type: 3}
-      propertyPath: ReloadSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 27de254121bd8fb47a3bd5f92c89affa, type: 3}
-    - target: {fileID: 918522322210631685, guid: ac7e7eeb44a08fe4d96cfe3c11298c83,
-        type: 3}
-      propertyPath: source
-      value: 
-      objectReference: {fileID: 212060990}
-    - target: {fileID: 918522322210631685, guid: ac7e7eeb44a08fe4d96cfe3c11298c83,
-        type: 3}
-      propertyPath: ShotSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 45076188a41db644bb3e4535da2e64bc, type: 3}
-    - target: {fileID: 918522322210631685, guid: ac7e7eeb44a08fe4d96cfe3c11298c83,
-        type: 3}
-      propertyPath: ReloadSound
-      value: 
-      objectReference: {fileID: 8300000, guid: fb14cd278a8ce554ead1b75af656cb12, type: 3}
-    - target: {fileID: 2288429756729412130, guid: ac7e7eeb44a08fe4d96cfe3c11298c83,
-        type: 3}
-      propertyPath: source
-      value: 
-      objectReference: {fileID: 212060990}
-    - target: {fileID: 2288429756729412130, guid: ac7e7eeb44a08fe4d96cfe3c11298c83,
-        type: 3}
-      propertyPath: ShotSound
-      value: 
-      objectReference: {fileID: 8300000, guid: d4105a8417a2784419646af9e7c7479a, type: 3}
-    - target: {fileID: 2288429756729412130, guid: ac7e7eeb44a08fe4d96cfe3c11298c83,
-        type: 3}
-      propertyPath: ReloadSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 0b90704ad8d336e45bab3c8735edba68, type: 3}
-    - target: {fileID: 2516655958657439393, guid: ac7e7eeb44a08fe4d96cfe3c11298c83,
-        type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2713482630760504481, guid: ac7e7eeb44a08fe4d96cfe3c11298c83,
-        type: 3}
-      propertyPath: m_Name
-      value: Audio Source Rifle
-      objectReference: {fileID: 0}
     - target: {fileID: 5951098631465354168, guid: ac7e7eeb44a08fe4d96cfe3c11298c83,
         type: 3}
       propertyPath: m_Name
@@ -329,16 +264,6 @@ PrefabInstance:
     - target: {fileID: 5951098631465360451, guid: ac7e7eeb44a08fe4d96cfe3c11298c83,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7310381208542019847, guid: ac7e7eeb44a08fe4d96cfe3c11298c83,
-        type: 3}
-      propertyPath: m_Name
-      value: Audio Source Shotgun
-      objectReference: {fileID: 0}
-    - target: {fileID: 8680693954556183508, guid: ac7e7eeb44a08fe4d96cfe3c11298c83,
-        type: 3}
-      propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -781,12 +706,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!82 &212060990 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 8680693954556183508, guid: ac7e7eeb44a08fe4d96cfe3c11298c83,
-    type: 3}
-  m_PrefabInstance: {fileID: 21028213}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &226937303
 GameObject:
   m_ObjectHideFlags: 0
@@ -2613,8 +2532,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179647edab146d14ca4ec63c92fcdb13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnTimeMin: 1
-  SpawnTimeMax: 3
 --- !u!1 &1009186432
 GameObject:
   m_ObjectHideFlags: 0
@@ -4441,9 +4358,9 @@ RectTransform:
   m_Father: {fileID: 1009186436}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 178, y: 227}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -360, y: -46}
   m_SizeDelta: {x: 200, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1852089922

@@ -14,12 +14,12 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
     protected float attackRate;
     protected float distance; // distance between palyer and enemy
-    protected float speed = 5f;
+    protected float speed = 7f;
     protected float chargeForce = 10f;
     protected float jumpForce = 5f;
     protected float chargeZone = 7f;
     protected float damageZone = 2f;
-    protected float perceprionRange = 15f;
+    protected float perceprionRange = 45f;
     protected Vector3 direction; // enemy movement direction towards player
 
     private Rigidbody EnemyRB;

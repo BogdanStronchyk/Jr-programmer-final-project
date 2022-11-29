@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5475085848130953750}
   - component: {fileID: 8680693954556183508}
   m_Layer: 0
-  m_Name: Audio Source
+  m_Name: Audio Source Handgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,7 +43,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 7539972253348257141}
   - component: {fileID: 361163076543469298}
   m_Layer: 0
-  m_Name: Audio Source
+  m_Name: Audio Source Rifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -171,7 +171,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -516,7 +516,7 @@ GameObject:
   - component: {fileID: 903848817116347012}
   - component: {fileID: 2516655958657439393}
   m_Layer: 0
-  m_Name: Audio Source (1)
+  m_Name: Audio Source Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -548,7 +548,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -674,6 +674,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3848833213138663961}
     m_Modifications:
+    - target: {fileID: 267893347, guid: 4f498b77225b3c746b3863192b4ce56e, type: 3}
+      propertyPath: ShotSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 45076188a41db644bb3e4535da2e64bc, type: 3}
+    - target: {fileID: 267893347, guid: 4f498b77225b3c746b3863192b4ce56e, type: 3}
+      propertyPath: ReloadSound
+      value: 
+      objectReference: {fileID: 8300000, guid: fb14cd278a8ce554ead1b75af656cb12, type: 3}
     - target: {fileID: 504762306979179271, guid: 4f498b77225b3c746b3863192b4ce56e,
         type: 3}
       propertyPath: m_RootOrder
@@ -848,6 +856,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5572270030856257007, guid: ff04df4a5bf5ee44d877bacd7a7d8a55,
+        type: 3}
+      propertyPath: ShotSound
+      value: 
+      objectReference: {fileID: 8300000, guid: d4105a8417a2784419646af9e7c7479a, type: 3}
+    - target: {fileID: 5572270030856257007, guid: ff04df4a5bf5ee44d877bacd7a7d8a55,
+        type: 3}
+      propertyPath: ReloadSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 0b90704ad8d336e45bab3c8735edba68, type: 3}
     m_RemovedComponents:
     - {fileID: 2285260965611741580, guid: ff04df4a5bf5ee44d877bacd7a7d8a55, type: 3}
     - {fileID: 6935741878100719654, guid: ff04df4a5bf5ee44d877bacd7a7d8a55, type: 3}
@@ -936,6 +954,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6408439308827880631, guid: 3b9aa762bded1df43b515b490c858a97,
+        type: 3}
+      propertyPath: ShotSound
+      value: 
+      objectReference: {fileID: 8300000, guid: c6abc39f4ef669f499d72d5cfaddd6b9, type: 3}
+    - target: {fileID: 6408439308827880631, guid: 3b9aa762bded1df43b515b490c858a97,
+        type: 3}
+      propertyPath: ReloadSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 27de254121bd8fb47a3bd5f92c89affa, type: 3}
     m_RemovedComponents:
     - {fileID: 5565624105833185099, guid: 3b9aa762bded1df43b515b490c858a97, type: 3}
     - {fileID: 2285260965611741580, guid: 3b9aa762bded1df43b515b490c858a97, type: 3}
