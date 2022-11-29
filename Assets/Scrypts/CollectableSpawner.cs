@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class CollectableSpawner : MonoBehaviour
 {
-    public GameObject HealingCollectable;
-    public GameObject Ammo;
     public int SpawnTimeMin = 1;
     public int SpawnTimeMax = 3;
 
     private bool ReadyToSpawn = true;
 
-    private void Start()
+    private void Awake()
     {
         ObjectPooler.current.pooledAmount1 = 9;
     }

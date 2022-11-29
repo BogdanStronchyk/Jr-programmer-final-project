@@ -37,12 +37,12 @@ public class SpawnManager : MonoBehaviour
 
     void Update()
     {
-        //if (spawnWave == true && waveCounter < waves)
-        //{
-        //    waveCounter += 1;
-        //    SpawnEnemies(waveCounter);
-        //    spawnWave = false;
-        //}
+        if (spawnWave == true && waveCounter < waves)
+        {
+            waveCounter += 1;
+            SpawnEnemies(waveCounter);
+            spawnWave = false;
+        }
 
         // counting active enemies
         int i = 0;

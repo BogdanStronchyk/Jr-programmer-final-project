@@ -12,7 +12,11 @@ public class HealingVale : Collectable
 
     protected override void RestoreValue()
     {
-        Player.Instance.health += value;
+        if (Player.Instance.health < 100)
+        {
+            Player.Instance.health += value;
+        }
+        
     }
 
     // Update is called once per frame

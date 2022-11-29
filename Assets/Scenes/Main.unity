@@ -206,11 +206,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3175586709062826525, guid: ac7e7eeb44a08fe4d96cfe3c11298c83,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5951098631465354168, guid: ac7e7eeb44a08fe4d96cfe3c11298c83,
         type: 3}
       propertyPath: m_Name
@@ -271,16 +266,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8230399558895896502, guid: ac7e7eeb44a08fe4d96cfe3c11298c83,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8230399559535653202, guid: ac7e7eeb44a08fe4d96cfe3c11298c83,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac7e7eeb44a08fe4d96cfe3c11298c83, type: 3}
 --- !u!1 &50859749
@@ -314,6 +299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthText: {fileID: 1315633866}
   ammoText: {fileID: 211885209}
+  AvailableAmmoText: {fileID: 0}
   GunText: {fileID: 412015056}
   scoreText: {fileID: 1874431985}
   GameUI: {fileID: 208715572}
@@ -1084,6 +1070,7 @@ MonoBehaviour:
   pooledObject3: {fileID: 8082536703792811461, guid: 05b00af3dae41b6438396539e0406926,
     type: 3}
   pooledAmount: 0
+  pooledAmount1: 0
   willGrow: 1
   pooledObjects1: []
   pooledObjects2: []
@@ -1933,6 +1920,8 @@ MonoBehaviour:
   HealingCollectable: {fileID: 8082536703792811461, guid: 05b00af3dae41b6438396539e0406926,
     type: 3}
   Ammo: {fileID: 1127456220733413044, guid: 96a333a5dab88b24b8f19d40bb830430, type: 3}
+  SpawnTimeMin: 1
+  SpawnTimeMax: 3
 --- !u!1 &1009186432
 GameObject:
   m_ObjectHideFlags: 0

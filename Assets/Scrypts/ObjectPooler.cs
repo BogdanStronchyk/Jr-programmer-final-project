@@ -100,13 +100,13 @@ public class ObjectPooler : MonoBehaviour
             }
         }
 
-        if (willGrow)
-        {
-            GameObject obj = (GameObject)Instantiate(pooledObject);
-            obj.SetActive(false);
-            pool.Add(obj);
-            return obj;
-        }
+        //if (willGrow)
+        //{
+        //    GameObject obj = (GameObject)Instantiate(pooledObject);
+        //    obj.SetActive(false);
+        //    pool.Add(obj);
+        //    return obj;
+        //}
 
         return null;
     }

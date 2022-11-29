@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
         get { return m_health; }
         set
         {   
-            if (value < 0)
+            if (value < 0 || m_health + value > 100)
             {
                 return;
             }

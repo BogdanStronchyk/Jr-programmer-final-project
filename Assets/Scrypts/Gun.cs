@@ -61,7 +61,16 @@ public abstract class Gun : MonoBehaviour
 
 
     public List<Vector3> hitPointCoords;
+    [Header("Sounds")]
+    public AudioClip ShotSound;
+    public AudioClip ReloadSound;
+    private AudioSource source;
 
+    private void Start()
+    {
+        source = FindObjectOfType<AudioSource>();
+        Debug.Log(source);
+    }
 
     /// <summary>
     /// The shot event itself; raycasting is used for the sake of simplicity
@@ -71,6 +80,7 @@ public abstract class Gun : MonoBehaviour
         hitPointCoords.Clear();
         if (currentAmmo > 0)
         {
+            source.PlayOneShot(ShotSound);
             Ray ray = FindObjectOfType<Camera>().ViewportPointToRay(GetBulletDirection());
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
@@ -95,7 +105,7 @@ public abstract class Gun : MonoBehaviour
     {
         if (currentAmmo > 0)
         {
-
+            source.PlayOneShot(ShotSound);
             for (int i = 0; i < rays; i++)
             {
 
@@ -158,6 +168,7 @@ public abstract class Gun : MonoBehaviour
     {
         if (currentAmmo < maxAmmo && Player.Instance.ammunition > 0 && !reloading)
         {
+            source.PlayOneShot(ReloadSound);
             StartCoroutine(DelayedReload());
             reloading = true;
         }  
